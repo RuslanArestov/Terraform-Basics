@@ -2,8 +2,6 @@
 
 ![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-03/images/1.png) 
 ![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-03/images/1-2_egress.png) <br>
-![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-03/images/1-3.txt) <br>
-
 
 4. Create dynamic inventory Ansible
 
