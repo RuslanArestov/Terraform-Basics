@@ -1,4 +1,5 @@
-output "webservers" {
+
+/*output "webservers" {
   value = [
     for vm in yandex_compute_instance.web : {
       name = vm.name
@@ -16,4 +17,10 @@ output "databases" {
       fqdn = vm.fqdn
     }
   ]
+}*/
+
+
+# Тоже самое, что и выше, только данные выводятся в одном списке
+output "all_vms" {
+  value = local.all_vms
 }

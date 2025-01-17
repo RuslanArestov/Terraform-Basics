@@ -90,10 +90,6 @@ variable "each_vm" {
   ]
 }
 
-locals {
-  ssh_public_key = file("~/.ssh/terraform_study.pub")
-}
-
 variable "vm_storage" {
   type        = string
   default     = "storage"
@@ -104,4 +100,63 @@ variable "fqdn_vm_storage" {
   default     = "storage.ru-central1.internal"
 }
 
+variable "web_provision" {
+  type        = bool
+  default     = true
+  description = "ansible provision switch variable"
+}
 
+variable "default_ingress_rules" {
+  description = "Default ingress security group rules"
+  type = list(object(
+    {
+      protocol       = string
+      description    = string
+      v4_cidr_blocks = list(string)
+      port           = optional(number)
+      from_port      = optional(number)
+      to_port        = optional(number)
+    }))
+  default = [
+    {
+      protocol       = "TCP"
+      description    = "разрешить входящий ssh"
+      v4_cidr_blocks = ["0.0.0.0/0"]
+      port           = 22
+    },
+    {
+      protocol       = "TCP"
+      description    = "разрешить входящий http"
+      v4_cidr_blocks = ["0.0.0.0/0"]
+      port           = 80
+    },
+    {
+      protocol       = "TCP"
+      description    = "разрешить входящий https"
+      v4_cidr_blocks = ["0.0.0.0/0"]
+      port           = 443
+    },
+  ]
+}
+
+variable "default_egress_rules" {
+  description = "Default egress security group rules"
+  type = list(object(
+    {
+      protocol       = string
+      description    = string
+      v4_cidr_blocks = list(string)
+      port           = optional(number)
+      from_port      = optional(number)
+      to_port        = optional(number)
+    }))
+  default = [
+    {
+      protocol       = "TCP"
+      description    = "разрешить весь исходящий трафик"
+      v4_cidr_blocks = ["0.0.0.0/0"]
+      from_port      = 0
+      to_port        = 65365
+    }
+  ]
+}
