@@ -1,10 +1,10 @@
 terraform {  
 
-   backend "s3" {
+    backend "s3" {
     
-  #   # shared_credentials_files = ["~/.aws/credentials"]
-  #   # shared_config_files = [ "~/.aws/config" ]
-  #   # profile = "default"
+    #shared_credentials_files = ["~/.aws/credentials"]
+    # shared_config_files = [ "~/.aws/config" ]
+    # profile = "default"
     
   
     endpoints ={ s3 = "https://storage.yandexcloud.net" }
@@ -12,16 +12,15 @@ terraform {
     key = "terraform.tfstate"
     region="ru-central1"
 
-  #    # access_key и secret_key для подключения к S3 передаются в консоли при выполнении terraform init
+     # access_key и secret_key для подключения к S3 передаются в консоли при выполнении terraform init
   
     skip_region_validation      = true
     skip_credentials_validation = true
     skip_requesting_account_id  = true # Необходимая опция Terraform для версии 1.6.1 и старше.
     skip_s3_checksum            = true # Необходимая опция при описании бэкенда для Terraform версии 1.6.3 и старше.
+   
 
-    
-
-    dynamodb_endpoint = "https://docapi.serverless.yandexcloud.net/ru-central1/b1ga19bdjsqdlb76sg23/etn8o5asvddj00duota4"
+    dynamodb_endpoint = "https://docapi.serverless.yandexcloud.net/ru-central1/b1ga19bdjsqdlb76sg23/etnugloob057av1igha0"
     dynamodb_table   = "tfstate_lock_table"
   }
 
@@ -51,10 +50,7 @@ provider "aws" {
   skip_credentials_validation = true
   skip_requesting_account_id  = true
   skip_metadata_api_check     = true
-  access_key = ""
-  secret_key = ""
-  
-}
+  }
 
 provider "yandex" {
   zone      = "ru-central1-a"
