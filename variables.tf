@@ -15,6 +15,10 @@ variable "vpc_name" {
   description = "VPC network&subnet name"
 }
 
+variable "folder_id" {
+  type        = string
+}
+
 ###common vars
 
 variable "first-vm_name" {
@@ -95,10 +99,24 @@ variable "zone_and_cidr" {
 }
 
 # Переменные для S3 бакета
-variable "bucket_name" {
-  description = "Имя S3 бакета"
+
+
+
+
+# #Токен для Vault
+# variable "vault_root_token" {
+#   type        = string
+#   sensitive   = true
+# }
+
+variable "folder_id" {
+  description = "Идентификатор папки в Yandex Cloud"
   type        = string
-  default     = "my-s3-bucket"
+}
+
+variable "bucket_name" {
+  description = "bucket-netology"
+  type        = string
 }
 
 variable "max_size" {
@@ -107,10 +125,99 @@ variable "max_size" {
   default     = 1073741824
 }
 
-#Токен для Vault
-variable "vault_root_token" {
-  type        = string
-  sensitive   = true
+variable "versioning_enabled" {
+  description = "Включить версионирование для бакета"
+  type        = bool
+  default     = true
 }
 
+variable "lockbox_secret_name" {
+  description = "Имя секрета в Lockbox"
+  type        = string
+  default     = "tfstate-lockbox-secret"
+}
 
+variable "ydb_database_name" {
+  description = "Имя базы данных YDB"
+  type        = string
+  default     = "tfstate-lock-db"
+}
+
+variable "ydb_table_name" {
+  description = "Имя таблицы YDB"
+  type        = string
+  default     = "tfstate_lock_table"
+}
+
+variable "ydb_column_name" {
+  description = "Имя колонки в таблице YDB"
+  type        = string
+  default     = "LockID"
+}
+
+variable "ydb_column_type" {
+  description = "Тип колонки в таблице YDB"
+  type        = string
+  default     = "string"
+}
+
+variable "ydb_primary_key" {
+  description = "Первичный ключ таблицы YDB"
+  type        = list(string)
+  default     = ["LockID"]
+}
+
+variable "deletion_protection" {
+  type        = bool
+  default     = false
+}
+
+variable "storage_size_limit" {
+  description = "Лимит хранения для базы данных YDB"
+  type        = number
+  default     = 1
+}
+
+variable "not_null" {
+  description = "Не нулевое значение"
+  type        = bool
+  default     = true
+}
+
+variable "entry_for_access_key" {
+  type        = string
+  default     = "access_key"
+}
+
+variable "entry_for_secret_key" {
+  type        = string
+  default     = "secret_key"
+}
+
+variable "sa_description" {
+  description = "Описание сервисного аккаунта"
+  type        = string
+  default     = "Ключ для подключения remote tfstate"
+}
+
+variable "module_source" {
+  type        = string
+  default     = "./modules/backet"
+}
+
+variable "role" {
+  description = "Роль для сервисного аккаунта"
+  type        = string
+  default     = "ydb.editor"
+}
+
+variable "sa_name" {
+  description = "Имя сервисного аккаунта"
+  type        = string
+  default     = "tfstate-sa"
+}
+
+variable "sa_description" {
+  type        = string
+  default     = "Сервисный аккаунт для YDB"
+}

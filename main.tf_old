@@ -1,4 +1,4 @@
-/*resource "yandex_vpc_network" "develop" {
+resource "yandex_vpc_network" "develop" {
   name = var.vpc_name
 }
 resource "yandex_vpc_subnet" "develop" {
@@ -6,7 +6,7 @@ resource "yandex_vpc_subnet" "develop" {
   zone           = var.default_zone
   network_id     = yandex_vpc_network.develop.id
   v4_cidr_blocks = var.default_cidr
-}*/
+}
 
 data "template_file" "userdata" {
   template = file("${path.module}/cloud-init.yml")
@@ -63,12 +63,12 @@ module "analytic_vm" {
 }
 
 # Вторая сеть, созданная из модуля
-/*module "vpc" {
+module "vpc" {
   source      = "./modules/vpc"
   env_name    = var.vpc_name_stage
   cidr        = var.stage_cidr
   zone        = var.default_zone
-}*/
+}
 
 module "vpc" {
   source      = "./modules/vpc"
@@ -95,6 +95,27 @@ module "s3" {
   }
 }
 
+#Создание сервисного аккаунта
+resource "yandex_iam_service_account" "tfstate" {
+  name        = "tfstate"
+  description = "Сервисный аккаунт для YDB"
+}
+
+resource "yandex_resourcemanager_folder_iam_member" "editor" {
+  folder_id = var.folder_id
+  role      = "ydb.editor"
+  member    = "serviceAccount:${yandex_iam_service_account.tfstate.id}"
+}
+
+# Создать статический ключ для сервисного аккаунта
+
+# Создать YDB. tfstate-lock, таблицу (документная) tfstate-lock и колонку LockID,
+# ключ партицирования включен
+# dynamodb считать
+
+# В бакете настроки ACL выбрать созданный СА и READ и WRITE
+
+
 resource "local_file" "env_file" {
   content  = <<EOT
 VAULT_DEV_ROOT_TOKEN_ID=${var.vault_root_token}
@@ -113,6 +134,7 @@ resource "null_resource" "docker_compose" {
 
   triggers = {
     always_run = "${timestamp()}"
+    #always_run = timestamp() - это правильная срока
   }
 }
 

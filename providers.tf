@@ -1,4 +1,30 @@
-terraform {
+terraform {  
+
+  backend "s3" {
+    
+    # shared_credentials_files = ["~/.aws/credentials"]
+    # shared_config_files = [ "~/.aws/config" ]
+    # profile = "default"
+    
+  
+    endpoints ={ s3 = "https://storage.yandexcloud.net" }
+    bucket     = "bucket-netology"
+    key = "terraform.tfstate"
+    region="ru-central1"
+
+     # access_key и secret_key для подключения к S3 передаются в консоли при выполнении terraform init
+  
+    skip_region_validation      = true
+    skip_credentials_validation = true
+    skip_requesting_account_id  = true # Необходимая опция Terraform для версии 1.6.1 и старше.
+    skip_s3_checksum            = true # Необходимая опция при описании бэкенда для Terraform версии 1.6.3 и старше.
+
+    
+
+    dynamodb_endpoint = "https://docapi.serverless.yandexcloud.net/ru-central1/b1ga19bdjsqdlb76sg23/etnqafgln8147rmkaita"
+    dynamodb_table   = "tfstate_lock_table"
+ }
+
   required_version = ">= 1.3.0"
 
   required_providers {
@@ -24,17 +50,17 @@ provider "aws" {
   skip_credentials_validation = true
   skip_requesting_account_id  = true
   skip_metadata_api_check     = true
-  access_key                  = "mock_access_key"
-  secret_key                  = "mock_secret_key"
 }
 
 provider "yandex" {
   zone      = var.default_zone
 }
 
-provider "vault" {
- address = "http://192.168.3.239:8200"
- skip_tls_verify = true
- token = var.vault_root_token
-}
+# provider "vault" {
+#  address = "http://192.168.3.239:8200"
+#  skip_tls_verify = true
+#  token = var.vault_root_token
+# }
 
+
+# terraform init -backend-config="access_key=<открытая часть статического ключа sa>" -backend-config="secret_key=<закрытая часть статического ключа sa>"
