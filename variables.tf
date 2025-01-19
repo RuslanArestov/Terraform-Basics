@@ -98,10 +98,6 @@ variable "zone_and_cidr" {
   ]
 }
 
-# Переменные для S3 бакета
-
-
-
 
 # #Токен для Vault
 # variable "vault_root_token" {
@@ -109,15 +105,11 @@ variable "zone_and_cidr" {
 #   sensitive   = true
 # }
 
-variable "folder_id" {
-  description = "Идентификатор папки в Yandex Cloud"
-  type        = string
-}
-
-variable "bucket_name" {
-  description = "bucket-netology"
-  type        = string
-}
+# Переменные для S3 бакета
+# variable "bucket_name" {
+#   description = "bucket-netology"
+#   type        = string
+# }
 
 variable "max_size" {
   description = "Размер бакета"
@@ -194,15 +186,10 @@ variable "entry_for_secret_key" {
   default     = "secret_key"
 }
 
-variable "sa_description" {
+variable "sa_description_key" {
   description = "Описание сервисного аккаунта"
   type        = string
   default     = "Ключ для подключения remote tfstate"
-}
-
-variable "module_source" {
-  type        = string
-  default     = "./modules/backet"
 }
 
 variable "role" {
