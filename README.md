@@ -1,31 +1,32 @@
-1. 
+# Задание 1 
 
-![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-04/images/marketing-nginx.png) 
-![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-04/images/analytic-nginx.png) <br>
+tflint
 
-![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-04/images/marketing-yc_console.png) <br>
-![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-04/images/analytic-yc_console.png) <br>
+1. Отсутствует ограничение версии для provider "template", "local", "null", "vault". Указываем версию.
+2. Использование ветки по умолчанию в источнике модуля. Нужно ипользовать конкретный тег или коммит.
+3. Устаревшие интерполяционные выражения always_run = "${timestamp()}". Используем always_run = timestamp()
+4. variable "default_cidr", variable "vpc_name" и variable "stage_cidr" задеклалированы, но не используются. Убираем их.
 
-![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-04/images/marketing-terraform-console.png) <br>
-![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-04/images/analytic-terraform-console.png) <br>
+chekov
+
+1. Не назначена группа безопасности ВМ
+2. Использование ветки по умолчанию в источнике модуля.
 
 
-2. 
+# Задание 2
 
-![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-04/images/2.module_vpc.png)
+![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-05/images/2-1.png) <br/>
+![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-05/images/2-2.png) <br/>
+![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-05/images/2-3.table.png) <br/>
+![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-05/images/2.error_terraform_console.png) <br/>
+![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-05/images/2.unlock_state.png)
 
-3. 
+# Задание 3
 
-![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-04/images/3_all_resource_state.png) <br>
-![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-04/images/3_rm_modules.png) <br>
-![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-04/images/3_import_module_analytic_vm.png) <br>
-![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-04/images/3_import_module_vpc.png) <br>
-![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-04/images/3_terraform_plan_without_changes.png)
+Ссылка на PR: ![Alt text] (https://github.com/RuslanArestov/Terraform-Basics/pull/1#issue-2797906044)
 
-4. 
 
-![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-04/images/4.subnets.png)
+# Задание 4
 
-5. Это задание не делал.
-
-6 и 7 задания выполнил.
+![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-05/images/4.validation_true.png) <br/>
+![Alt text](https://github.com/RuslanArestov/Terraform-Basics/blob/terraform-05/images/4.validation_false.png)
