@@ -1,0 +1,18 @@
+Acquiring state lock. This may take a few moments...
+[0m[1myandex_iam_service_account.tfstate-sa: Refreshing state... [id=ajebctuo9sgq0cfrcinv][0m
+[0m[1myandex_lockbox_secret.lockbox_secret: Refreshing state... [id=e6q3p0m7ce9lotkecbae][0m
+[0m[1myandex_ydb_database_serverless.tfstate_lock-db: Refreshing state... [id=etnugloob057av1igha0][0m
+[0m[1mmodule.s3.data.yandex_client_config.client: Reading...[0m[0m
+[0m[1mmodule.s3.data.yandex_client_config.client: Read complete after 0s [id=3437252729][0m
+[0m[1mmodule.s3.random_string.unique_id: Refreshing state... [id=dtyt69fr][0m
+[0m[1myandex_resourcemanager_folder_iam_member.editor: Refreshing state... [id=b1ge6bvcgcf6f5fdolhp/ydb.editor/serviceAccount:ajebctuo9sgq0cfrcinv][0m
+[0m[1myandex_iam_service_account_static_access_key.sa-static-key: Refreshing state... [id=ajela2o767jd5rht2e6j][0m
+[0m[1mmodule.s3.data.yandex_iam_service_account.tfstate-sa: Reading...[0m[0m
+[0m[1mmodule.s3.data.yandex_iam_service_account.tfstate-sa: Read complete after 1s [id=ajebctuo9sgq0cfrcinv][0m
+[0m[1mmodule.s3.yandex_storage_bucket.this: Refreshing state... [id=bucket-netology][0m
+
+[0m[1m[32mNo changes.[0m[1m Your infrastructure matches the configuration.[0m
+
+[0mTerraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.
+Releasing state lock. This may take a few moments...

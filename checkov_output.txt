@@ -1,0 +1,147 @@
+2025-01-19 23:48:40,058 [MainThread  ] [WARNI]  Failed to get the checkov mappings and guidelines from https://api0.prismacloud.io/bridgecrew/api/v2/guidelines. Skips using BC_* IDs will not work.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/urllib3/connectionpool.py", line 466, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/lib/python3.11/site-packages/urllib3/connectionpool.py", line 1095, in _validate_conn
+    conn.connect()
+  File "/usr/local/lib/python3.11/site-packages/urllib3/connection.py", line 652, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/urllib3/connection.py", line 805, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/urllib3/util/ssl_.py", line 465, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/urllib3/util/ssl_.py", line 509, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/ssl.py", line 517, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/ssl.py", line 1104, in _create
+    self.do_handshake()
+  File "/usr/local/lib/python3.11/ssl.py", line 1382, in do_handshake
+    self._sslobj.do_handshake()
+TimeoutError: _ssl.c:989: The handshake operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/urllib3/connectionpool.py", line 789, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/urllib3/connectionpool.py", line 490, in _make_request
+    raise new_e
+  File "/usr/local/lib/python3.11/site-packages/urllib3/connectionpool.py", line 468, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=conn.timeout)
+  File "/usr/local/lib/python3.11/site-packages/urllib3/connectionpool.py", line 369, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api0.prismacloud.io', port=443): Read timed out. (read timeout=3.1)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/checkov/common/bridgecrew/platform_integration.py", line 1273, in get_public_run_config
+    request = self.http.request("GET", self.guidelines_api_url, headers=headers)  # type:ignore[no-untyped-call]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/urllib3/_request_methods.py", line 136, in request
+    return self.request_encode_url(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/urllib3/_request_methods.py", line 183, in request_encode_url
+    return self.urlopen(method, url, **extra_kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/urllib3/poolmanager.py", line 443, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/urllib3/connectionpool.py", line 873, in urlopen
+    return self.urlopen(
+           ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/urllib3/connectionpool.py", line 873, in urlopen
+    return self.urlopen(
+           ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/urllib3/connectionpool.py", line 873, in urlopen
+    return self.urlopen(
+           ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/urllib3/connectionpool.py", line 843, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api0.prismacloud.io', port=443): Max retries exceeded with url: /bridgecrew/api/v2/guidelines (Caused by ReadTimeoutError("HTTPSConnectionPool(host='api0.prismacloud.io', port=443): Read timed out. (read timeout=3.1)"))
+
+       _               _
+   ___| |__   ___  ___| | _______   __
+  / __| '_ \ / _ \/ __| |/ / _ \ \ / /
+ | (__| | | |  __/ (__|   < (_) \ V /
+  \___|_| |_|\___|\___|_|\_\___/ \_/
+
+By Prisma Cloud | version: 3.2.353 
+[0m[0m[0m
+[0m[0m[0m[34mterraform scan results:
+[0m[36m
+Passed checks: 16, Failed checks: 0, Skipped checks: 0
+
+[0m[97mCheck: CKV_YC_17: "Ensure storage bucket does not have public access permissions."
+[0m[32m	PASSED for resource: module.s3.yandex_storage_bucket.this
+[0m[35m	File: /modules/backet/main.tf:61-221
+[0m[35m	Calling File: /resources.tf:23-32
+[0m[97mCheck: CKV_YC_3: "Ensure storage bucket is encrypted."
+[0m[32m	PASSED for resource: module.s3.yandex_storage_bucket.this
+[0m[35m	File: /modules/backet/main.tf:61-221
+[0m[35m	Calling File: /resources.tf:23-32
+[0m[97mCheck: CKV_AWS_107: "Ensure IAM policies does not allow credentials exposure"
+[0m[32m	PASSED for resource: module.s3.aws_iam_policy_document.this
+[0m[35m	File: /modules/backet/policy.tf:1-105
+[0m[35m	Calling File: /resources.tf:23-32
+[0m[97mCheck: CKV_AWS_358: "Ensure GitHub Actions OIDC trust policies only allows actions from a specific known organization"
+[0m[32m	PASSED for resource: module.s3.aws_iam_policy_document.this
+[0m[35m	File: /modules/backet/policy.tf:1-105
+[0m[35m	Calling File: /resources.tf:23-32
+[0m[97mCheck: CKV_AWS_109: "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+[0m[32m	PASSED for resource: module.s3.aws_iam_policy_document.this
+[0m[35m	File: /modules/backet/policy.tf:1-105
+[0m[35m	Calling File: /resources.tf:23-32
+[0m[97mCheck: CKV_AWS_111: "Ensure IAM policies does not allow write access without constraints"
+[0m[32m	PASSED for resource: module.s3.aws_iam_policy_document.this
+[0m[35m	File: /modules/backet/policy.tf:1-105
+[0m[35m	Calling File: /resources.tf:23-32
+[0m[97mCheck: CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+[0m[32m	PASSED for resource: module.s3.aws_iam_policy_document.this
+[0m[35m	File: /modules/backet/policy.tf:1-105
+[0m[35m	Calling File: /resources.tf:23-32
+[0m[97mCheck: CKV_AWS_283: "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource"
+[0m[32m	PASSED for resource: module.s3.aws_iam_policy_document.this
+[0m[35m	File: /modules/backet/policy.tf:1-105
+[0m[35m	Calling File: /resources.tf:23-32
+[0m[97mCheck: CKV_AWS_108: "Ensure IAM policies does not allow data exfiltration"
+[0m[32m	PASSED for resource: module.s3.aws_iam_policy_document.this
+[0m[35m	File: /modules/backet/policy.tf:1-105
+[0m[35m	Calling File: /resources.tf:23-32
+[0m[97mCheck: CKV_AWS_110: "Ensure IAM policies does not allow privilege escalation"
+[0m[32m	PASSED for resource: module.s3.aws_iam_policy_document.this
+[0m[35m	File: /modules/backet/policy.tf:1-105
+[0m[35m	Calling File: /resources.tf:23-32
+[0m[97mCheck: CKV_AWS_49: "Ensure no IAM policies documents allow "*" as a statement's actions"
+[0m[32m	PASSED for resource: module.s3.aws_iam_policy_document.this
+[0m[35m	File: /modules/backet/policy.tf:1-105
+[0m[35m	Calling File: /resources.tf:23-32
+[0m[97mCheck: CKV_AWS_1: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+[0m[32m	PASSED for resource: module.s3.aws_iam_policy_document.this
+[0m[35m	File: /modules/backet/policy.tf:1-105
+[0m[35m	Calling File: /resources.tf:23-32
+[0m[97mCheck: CKV_AWS_41: "Ensure no hard coded AWS access key and secret key exists in provider"
+[0m[32m	PASSED for resource: aws.default
+[0m[35m	File: /providers.tf:48-53
+[0m[97mCheck: CKV_YC_24: "Ensure passport account is not used for assignment. Use service accounts and federated accounts where possible."
+[0m[32m	PASSED for resource: yandex_resourcemanager_folder_iam_member.editor
+[0m[35m	File: /resources.tf:16-20
+[0m[97mCheck: CKV_YC_23: "Ensure folder member does not have elevated access."
+[0m[32m	PASSED for resource: yandex_resourcemanager_folder_iam_member.editor
+[0m[35m	File: /resources.tf:16-20
+[0m[97mCheck: CKV2_AWS_40: "Ensure AWS IAM policy does not allow full IAM privileges"
+[0m[32m	PASSED for resource: module.s3.aws_iam_policy_document.this
+[0m[35m	File: /modules/backet/policy.tf:1-105
+[0m[0m[0m[0m
+[0m[0m[0m[0m[0m
