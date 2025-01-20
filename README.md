@@ -23,7 +23,7 @@ chekov
 
 # Задание 3
 
-Ссылка на PR: ![Alt text] (https://github.com/RuslanArestov/Terraform-Basics/pull/1#issue-2797906044)
+[Ссылка на PR] (https://github.com/RuslanArestov/Terraform-Basics/pull/1#issue-2797906044)
 
 
 # Задание 4
