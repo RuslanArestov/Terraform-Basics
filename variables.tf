@@ -208,3 +208,30 @@ variable "sa_description" {
   type        = string
   default     = "Сервисный аккаунт для YDB"
 }
+
+variable "ip_address" {
+  description = "ip-адрес"
+  type        = string
+  default     = "192.168.0.1"
+  #deafult = "1920.1680.0.1"
+
+  validation {
+    condition     = can(regex("^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$", var.ip_address)) && length(split(".", var.ip_address)) == 4 && alltrue([for part in split(".", var.ip_address) : tonumber(part) >= 0 && tonumber(part) <= 255])
+    error_message = "Значение IP-адреса должно быть корректным"
+  }
+}
+
+variable "pool_of_ip_addresses" {
+  description = "список ip-адресов"
+  type        = list(string)
+  default     = ["192.168.0.1", "1.1.1.1", "127.0.0.1"]
+  #default = ["192.168.0.1", "1.1.1.1", "1270.0.0.1"]
+  
+   validation {
+    condition = alltrue([
+      for ip in var.pool_of_ip_addresses :
+      can(regex("^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$", ip)) && length(split(".", ip)) == 4 && alltrue([for part in split(".", ip) : tonumber(part) >= 0 && tonumber(part) <= 255])
+    ])
+    error_message = "Одно из значений неверное"
+  }
+} 
