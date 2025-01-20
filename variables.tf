@@ -218,3 +218,30 @@ variable "sa_description" {
   type        = string
   default     = "Сервисный аккаунт для YDB"
 }
+
+variable "ip_address" {
+  description = "ip-адрес"
+  type        = string
+  default     = "192.168.0.1"
+  #default = "1920.1680.0.1"
+
+  validation {
+    condition     = can(cidrhost("${var.ip_address}/32", 0))
+    error_message = "Значение IP-адреса должно быть корректным"
+  }
+}
+
+variable "pool_of_ip_addresses" {
+  description = "список ip-адресов"
+  type        = list(string)
+  default     =  ["192.168.0.1", "1.1.1.1", "127.0.0.1"]
+  #default     = ["192.168.0.1", "1.1.1.1", "1270.0.0.1"]
+
+  validation {
+    condition = alltrue([
+      for ip in var.pool_of_ip_addresses :
+      can(cidrhost("${ip}/32", 0))
+    ])
+    error_message = "Одно из значений неверное"
+  }
+}
